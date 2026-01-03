@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My JavaScript Project </title>
+</head>
+<body>
+
+<h1 id="greeting">Hello!</h1>
+
+<!-- Buttons to show JS functions -->
+
+<button id="btnGreet">Greet</button>
+<button id="btnArray">Show Fruits</button>
+<button id="btnObject">Show User</button>
+
+<!-- Input + button for multiple greetings -->
+<h3>Enter names:</h3>
+<input type="text" id="nameInput" placeholder="Example: Amina, Sara, Shakirah">
+<button id="btnMultiple">Greet All</button>
+
+<div id="greetingsContainer"></div>
+
+
+<!-- JS code -->
+<script>
+ 
+  console.log("JS is running in the browser!");
+
+  function greet(name) {
+    return `Good morning, ${name}!`;
+  }
+
+  const btnGreet = document.getElementById("btnGreet");
+  const greeting = document.getElementById("greeting");
+
+  btnGreet.addEventListener("click", () => {
+    greeting.textContent = greet("Shakirah");
+  });
+
+  // Arrays 
+  const fruits = ["Apple", "Banana", "Mango","Cucumber"];
+  const btnArray = document.getElementById("btnArray");
+  btnArray.addEventListener("click", () => {
+    alert("Fruits: " + fruits.join(", "));
+  });
+
+  //  Objects 
+  const user = { name: "Shakirah", age: 18, role: "student" }
+  const btnObject = document.getElementById("btnObject");
+  btnObject.addEventListener("click", () => {
+    alert(`User: ${user.name}, Age: ${user.age}, Role: ${user.role}`);
+  });
+
+  // Challenge: greet multiple names from input
+const nameInput = document.getElementById("nameInput");
+const btnMultiple = document.getElementById("btnMultiple");
+
+btnMultiple.addEventListener("click", () => {
+  const input = nameInput.value; // get input string
+  if (!input) {
+    alert("Please enter at least one name!");
+    return;
+  }
+
+  const names = input.split(",").map(name => name.trim()); // convert to array
+  let messages = "";
+  for (let name of names) {
+    messages += `Good morning, ${name}!\n`;
+  }
+  alert(messages);
+});
+
+// Get the container
+const greetingsContainer = document.getElementById("greetingsContainer");
+
+btnMultiple.addEventListener("click", () => {
+  const input = nameInput.value;
+  if (!input) {
+    alert("Please enter at least one name!");
+    return;
+  }
+
+  const names = input.split(",").map(name => name.trim());
+
+  // Clear previous greetings
+  greetingsContainer.innerHTML = "";
+
+  // Create a greeting for each name
+  for (let name of names) {
+    const p = document.createElement("p"); // create a paragraph
+    p.textContent = `Good morning, ${name}!`;
+
+    // Add a random color 
+    p.style.color = "#" + Math.floor(Math.random()*16777215).toString(16);
+
+    greetingsContainer.appendChild(p); // add it to the container
+  }
+});
+
+  
+
+</script>
+
+</body>
+</html>
